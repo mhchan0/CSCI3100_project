@@ -1,6 +1,6 @@
 library(rugarch)
 
-arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(1,1)){
+arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(2, 2)) {
   # ticker: ticker of stock to predict
   # m: Number of periods (days) to predict
   # arma_order: Order of ARMA model
@@ -33,4 +33,4 @@ arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(1,1))
   write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
   write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
 }
-arma_garch_pred("AAPL", m=100)
+arma_garch_pred("AAPL", m=20)
