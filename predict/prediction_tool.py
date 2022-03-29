@@ -4,7 +4,7 @@ import pandas as pd
 import scipy.stats as ss
 import matplotlib.pyplot as plt
 
-def convidence_interval(stock, CI=0.95):
+def confidence_interval(stock, CI=0.95):
     """
     Parameters
     ----------
@@ -54,3 +54,5 @@ def convidence_interval(stock, CI=0.95):
     plt.plot(expected_prices)
     plt.plot(min_prices)
     plt.plot(max_prices)
+    
+confidence_interval("TSLA")

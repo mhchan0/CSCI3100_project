@@ -1,6 +1,6 @@
 library(rugarch)
 
-arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(2, 2)) {
+arma_garch_pred <- function(ticker, m=5, use_period=180, arma_order=c(1, 1), garch_order=c(2, 2)) {
   # ticker: ticker of stock to predict
   # m: Number of periods (days) to predict
   # arma_order: Order of ARMA model
@@ -9,7 +9,7 @@ arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(2, 2)
   # Retrieving data from csv & calculating log return
   path <- paste("stock_data/", ticker, ".csv", sep="")
   stock <- read.csv(path)$Adj.Close
-  stock <- tail(stock, 360)
+  stock <- tail(stock, use_period)
   log_returns <- diff(log(stock), lag=1)
   
   # Fitting ARMA-GARCH model
@@ -33,4 +33,4 @@ arma_garch_pred <- function(ticker, m=5, arma_order=c(1, 1), garch_order=c(2, 2)
   write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
   write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
 }
-arma_garch_pred("AAPL", m=20)
+arma_garch_pred("TSLA", m=20)
