@@ -55,4 +55,4 @@ def confidence_interval(stock, CI=0.95):
     plt.plot(min_prices)
     plt.plot(max_prices)
     
-confidence_interval("TSLA")
+confidence_interval("TSLA", CI=0.8)
