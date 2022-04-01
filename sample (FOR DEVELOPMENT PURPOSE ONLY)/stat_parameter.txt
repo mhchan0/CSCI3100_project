@@ -1,4 +1,5 @@
 General: No. of periods to use for prediction, no. of periods to predict
+Default: No. of periods to use for prediction=180 (100-730), no. of periods to predict=7 (1-30)
 
 Confidence Interval: ___% Confidence interval (Or Confidence Interval (___%))
 Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
