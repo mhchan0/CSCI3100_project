@@ -1,9 +1,9 @@
 General: No. of periods to use for prediction, no. of periods to predict
-Default: No. of periods to use for prediction=180 (must be 100-1000), no. of periods to predict=7 (must be 1-20)
+Default: No. of periods to use for prediction=125 (must be 100-750), no. of periods to predict=7 (must be 1-20)
 
 Confidence Interval: ___% Confidence interval (Or Confidence Interval (___%))
 Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
-Return (display) two floats ($), in the form (____, ____)
+Return (display) two floats ($), in the form ($___, $___)
 
 Value at Risk (VaR): ___% Value at Risk (VaR) ((Or Value at Risk (VaR) (___%)))
 Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
