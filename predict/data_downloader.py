@@ -33,14 +33,24 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
         symbols = pd.concat([symbol1, symbol2])
         for symbol in symbols.values:
             try:
-                stock = yf.download(symbol[0], start=modified_start, end=modified_end)
+                stock = yf.download(symbol[0], start=modified_start, end=modified_end, timeout=3)
+                retry = 10
+                while stock.shape[0] < 3 and retry > 0:   # For error handling, as yfinance sometimes does not work for unknown reasons
+                    stock = yf.download(symbol[0], start=modified_start, end=modified_end, timeout=3)
+                    retry -= 1
                 stock.to_csv(f'stock_data/{symbol[0]}.csv')
             except Exception:
                 continue
     else:
         for symbol in symbols:
             try:
-                stock = yf.download(symbol, start=modified_start, end=modified_end)
+                stock = yf.download(symbol, start=modified_start, end=modified_end, timeout=3)
+                retry = 10
+                while stock.shape[0] < 3 and retry > 0:   # For error handling, as yfinance sometimes does not work for unknown reasons
+                    stock = yf.download(symbol, start=modified_start, end=modified_end, timeout=3)
+                    retry -= 1
+                if retry == 0:
+                    print(f"Error downloading data for {stock}. Please check if inputs are correct.")
                 stock.to_csv(f'stock_data/{symbol}.csv')
             except Exception:
                 continue
