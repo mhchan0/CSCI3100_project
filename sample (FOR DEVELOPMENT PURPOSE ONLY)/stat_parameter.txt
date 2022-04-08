@@ -3,7 +3,7 @@ Default: No. of periods to use for prediction=125 (must be 100-750), no. of peri
 
 Confidence Interval: ___% Confidence interval (Or Confidence Interval (___%))
 Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
-Return (display) four floats, in the form "$___, $___ (___%, ___%)"
+Return (display) four floats, in the form "($___, $___) ((___%, ___%))"
 
 Value at Risk (VaR): ___% Value at Risk (VaR) ((Or Value at Risk (VaR) (___%)))
 Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)

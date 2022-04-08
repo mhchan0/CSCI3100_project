@@ -87,7 +87,7 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
             plt.ylabel("Price (HKD)")
         else:
             plt.ylabel("Price (USD)")
-        plt.savefig(f"stock_graph/{stock}_{CI}.jpg")
+        plt.savefig(f"stock_graph/{stock}.jpg")
         plt.show()
 
     
@@ -293,7 +293,7 @@ def expected_sharpe_ratio(stock):
     return expected_sharpe
 
 # For debugging
-stock = "AWK"
+stock = "AAPL"
 
 print("CI (price):", price_confidence_interval(stock, CI=0.9, plot_graph=True))
 print("CI (return):", return_confidence_interval(stock, CI=0.9))
