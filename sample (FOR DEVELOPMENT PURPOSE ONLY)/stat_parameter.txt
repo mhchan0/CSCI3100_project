@@ -11,3 +11,8 @@ Return (display) two floats, in the form "$___ (___%)"
 
 Expected price, Expected log return, Expected volatility, Annualized Sharpe ratio: No additional parameter
 Return (display) a float (NOT $ except for expected price)
+
+Step:
+1. Download data for the stock from yfinance (data_download function in predict/datadownloader.py) 
+2. Run arma_garch_pred function in prediction.R (ticker=symbol, m=no. of periods to predict, use_period=No. of periods to use for prediction)
+3. Run all the function in prediction_tool ()
