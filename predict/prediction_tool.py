@@ -87,7 +87,7 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
             plt.ylabel("Price (HKD)")
         else:
             plt.ylabel("Price (USD)")
-        plt.savefig(f"stock_graph/{stock}.jpg")
+        plt.savefig(f"stock_graph/{stock}.jpg", bbox_inches="tight")
         plt.show()
 
     
