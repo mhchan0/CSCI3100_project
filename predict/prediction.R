@@ -47,4 +47,4 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
   write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
 }
-arma_garch_pred("AWK", m=20)
+arma_garch_pred("AAPL", m=20)

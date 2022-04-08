@@ -293,7 +293,7 @@ def expected_sharpe_ratio(stock):
     return expected_sharpe
 
 # For debugging
-stock = "1997.HK"
+stock = "AWK"
 
 print("CI (price):", price_confidence_interval(stock, CI=0.9, plot_graph=True))
 print("CI (return):", return_confidence_interval(stock, CI=0.9))
