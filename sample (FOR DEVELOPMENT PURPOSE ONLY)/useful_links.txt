@@ -1,0 +1,2 @@
+Running R functions in node.js: https://www.npmjs.com/package/r-integration
+Running Python functions in node.js: https://www.npmjs.com/package/python-shell
