@@ -10,7 +10,7 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
     ----------
     symbols : None or string, optional
         If None, download all SP500 & HSI constituent stock data;
-        else stock with symbol as input. 
+        else download stock with symbol as input. 
         The default is None.
     date : datetime.date object, optional
         Starting date of data to be downloaded. 
