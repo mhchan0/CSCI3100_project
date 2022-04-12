@@ -81,6 +81,7 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
                          max_price_date["Adj Close"], 
                          color="#CC0033",
                          alpha=0.3)
+        plt.axvline(data.index[-1], color="g", linewidth=1, linestyle="--")
         plt.xticks(rotation=45)
         plt.legend(handles=[fill], labels=["Confidence Interval"])
         if stock[0].isdigit():
