@@ -4,7 +4,7 @@ import pandas as pd
 import scipy.stats as ss
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import sys
 def price_confidence_interval(stock, CI=0.95, plot_graph=False):
     """
     Predicts confidence interval of price for stock.
@@ -91,8 +91,8 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
         plt.show()
 
     
-    upper_bound, lower_bound = round(max_prices[-1], 2), round(min_prices[-1], 2)
-    return upper_bound, lower_bound
+    lower_bound, upper_bound = min_prices[-1], max_prices[-1]
+    return lower_bound, upper_bound
 
 def return_confidence_interval(stock, CI=0.95):
     """
@@ -130,12 +130,12 @@ def return_confidence_interval(stock, CI=0.95):
                               expected_log_return[:i + 1],
                               expected_std[:i + 1]) for i in range(len(expected_log_return))]
     
-    upper_bound, lower_bound = round(np.sum(max_return[-1]), 4), round(np.sum(min_return[-1]), 4)
-    return upper_bound, lower_bound
+    lower_bound, upper_bound = np.sum(min_return[-1]), np.sum(max_return[-1])
+    return lower_bound, upper_bound
     
 def VaR_price(stock, param=0.95):
     """
-    Predicts VaR (in dollar) of stock.
+    Predicts VaR (in $) of stock.
     
     Parameters
     ----------
@@ -147,7 +147,7 @@ def VaR_price(stock, param=0.95):
     Returns
     -------
     final_VaR : float
-        Expected VaR (%) of the stock.
+        Expected VaR of the stock.
 
     """
     data = pd.read_csv(f"stock_data/{stock}.csv",
@@ -174,12 +174,12 @@ def VaR_price(stock, param=0.95):
             
     min_prices = np.minimum(data["Adj Close"].iloc[-1], min_prices)
     
-    final_VaR = round(data["Adj Close"].iloc[-1] - min_prices[-1], 2)
+    final_VaR = data["Adj Close"].iloc[-1] - min_prices[-1]
     return final_VaR
 
-def VaR_return(stock, param=0.95):
+def VaR_percent(stock, param=0.95):
     """
-    Predicts VaR (in dollar) of stock.
+    Predicts VaR (in %) of stock.
     
     Parameters
     ----------
@@ -190,8 +190,8 @@ def VaR_return(stock, param=0.95):
 
     Returns
     -------
-    min_return : float
-        Expected VaR (price) of the stock.
+    final_VaR : float
+        Expected VaR (%) of the stock.
 
     """
     expected_log_return = pd.read_csv(f"prediction_data/{stock}_mu.csv").x
@@ -205,8 +205,8 @@ def VaR_return(stock, param=0.95):
                               expected_log_return[:i + 1],
                               expected_std[:i + 1]) for i in range(len(expected_log_return))]
             
-    min_return = round(-np.minimum(0, np.sum(min_return[-1])), 4)
-    return min_return
+    min_return = np.minimum(0, np.sum(min_return[-1]))
+    return -min_return
 
 def expected_log_return(stock):
     """
@@ -224,12 +224,12 @@ def expected_log_return(stock):
 
     """
     expected_log_return = pd.read_csv(f"prediction_data/{stock}_mu.csv").x
-    total_expected_return = round(np.sum(expected_log_return), 4)
+    total_expected_return = np.sum(expected_log_return)
     return total_expected_return
 
 def expected_price(stock):
     """
-    Predicts price (in dollar) of stock.
+    Predicts price (in $) of stock.
 
     Parameters
     ----------
@@ -248,7 +248,7 @@ def expected_price(stock):
                             parse_dates=True)
     last_price = data["Adj Close"].iloc[-1]
     expected_return = expected_log_return(stock)
-    price = round(last_price * math.exp(expected_return), 2)
+    price = last_price * math.exp(expected_return)
     return price
     
 def expected_std(stock):
@@ -266,9 +266,9 @@ def expected_std(stock):
         Expected standard deviation of return.
 
     """
-    upper_bound, lower_bound = return_confidence_interval(stock)
+    lower_bound, upper_bound = return_confidence_interval(stock)
     interval_width = upper_bound - lower_bound
-    std = round(interval_width / (2 * ss.norm.ppf(0.975)), 4)
+    std = interval_width / (2 * ss.norm.ppf(0.975))
     return std
 
 def expected_sharpe_ratio(stock):
@@ -290,17 +290,19 @@ def expected_sharpe_ratio(stock):
     expected_sd = expected_std(stock)
     expected_sharpe = expected_return / expected_sd
     expected_sharpe *= math.sqrt(250 / len(pd.read_csv(f"prediction_data/{stock}_mu.csv").x))
-    expected_sharpe = round(expected_sharpe, 2)
     return expected_sharpe
 
 # For debugging
 stock = "AAPL"
 
-print("CI (price):", price_confidence_interval(stock, CI=0.9, plot_graph=True))
-print("CI (return):", return_confidence_interval(stock, CI=0.9))
-print("VaR (price):", VaR_price(stock, param=0.95))
-print("VaR (return):", VaR_return(stock, param=0.95))
-print("Log return:", expected_log_return(stock))
-print("Price:", expected_price(stock))
-print("Std:", expected_std(stock))
-print("Sharpe ratio:", expected_sharpe_ratio(stock))
+price_lower, price_upper = price_confidence_interval(stock, CI=0.95, plot_graph=True)
+return_lower, return_upper = return_confidence_interval(stock, CI=0.95)
+
+print(f"Confidence Interval (Price): (${round(price_lower, 2)}, ${round(price_upper, 2)})")
+print(f"Confidence Interval (Return): ({round(100 * return_lower, 2)}%, {round(100 * return_upper, 2)}%)")
+print(f"Value at Risk ($): ${round(VaR_price(stock, param=0.95), 2)}")
+print(f"Value at Risk (%): {round(100 * VaR_percent(stock, param=0.95), 2)}%")
+print(f"Expected Log Return: {round(100 * expected_log_return(stock), 2)}%")
+print(f"Expected Price: ${round(expected_price(stock), 2)}")
+print(f"Standard Deviation (Return): {round(expected_std(stock), 4)}")
+print(f"Sharpe Ratio: {round(expected_sharpe_ratio(stock), 2)}")
