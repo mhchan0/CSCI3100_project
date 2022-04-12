@@ -91,7 +91,7 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
         plt.show()
 
     
-    upper_bound, lower_bound = max_prices[-1], min_prices[-1]
+    upper_bound, lower_bound = round(max_prices[-1], 2), round(min_prices[-1], 2)
     return upper_bound, lower_bound
 
 def return_confidence_interval(stock, CI=0.95):
@@ -130,7 +130,7 @@ def return_confidence_interval(stock, CI=0.95):
                               expected_log_return[:i + 1],
                               expected_std[:i + 1]) for i in range(len(expected_log_return))]
     
-    upper_bound, lower_bound = np.sum(max_return[-1]), np.sum(min_return[-1])
+    upper_bound, lower_bound = round(np.sum(max_return[-1]), 4), round(np.sum(min_return[-1]), 4)
     return upper_bound, lower_bound
     
 def VaR_price(stock, param=0.95):
@@ -147,7 +147,7 @@ def VaR_price(stock, param=0.95):
     Returns
     -------
     final_VaR : float
-        Expected VaR of the stock.
+        Expected VaR (%) of the stock.
 
     """
     data = pd.read_csv(f"stock_data/{stock}.csv",
@@ -174,7 +174,7 @@ def VaR_price(stock, param=0.95):
             
     min_prices = np.minimum(data["Adj Close"].iloc[-1], min_prices)
     
-    final_VaR = data["Adj Close"].iloc[-1] - min_prices[-1]
+    final_VaR = round(data["Adj Close"].iloc[-1] - min_prices[-1], 2)
     return final_VaR
 
 def VaR_return(stock, param=0.95):
@@ -190,8 +190,8 @@ def VaR_return(stock, param=0.95):
 
     Returns
     -------
-    final_VaR : float
-        Expected VaR of the stock.
+    min_return : float
+        Expected VaR (price) of the stock.
 
     """
     expected_log_return = pd.read_csv(f"prediction_data/{stock}_mu.csv").x
@@ -205,8 +205,8 @@ def VaR_return(stock, param=0.95):
                               expected_log_return[:i + 1],
                               expected_std[:i + 1]) for i in range(len(expected_log_return))]
             
-    min_return = np.minimum(0, np.sum(min_return[-1]))
-    return -min_return
+    min_return = round(-np.minimum(0, np.sum(min_return[-1])), 4)
+    return min_return
 
 def expected_log_return(stock):
     """
@@ -224,7 +224,7 @@ def expected_log_return(stock):
 
     """
     expected_log_return = pd.read_csv(f"prediction_data/{stock}_mu.csv").x
-    total_expected_return = np.sum(expected_log_return)
+    total_expected_return = round(np.sum(expected_log_return), 4)
     return total_expected_return
 
 def expected_price(stock):
@@ -248,7 +248,7 @@ def expected_price(stock):
                             parse_dates=True)
     last_price = data["Adj Close"].iloc[-1]
     expected_return = expected_log_return(stock)
-    price = last_price * math.exp(expected_return)
+    price = round(last_price * math.exp(expected_return), 2)
     return price
     
 def expected_std(stock):
@@ -268,7 +268,7 @@ def expected_std(stock):
     """
     upper_bound, lower_bound = return_confidence_interval(stock)
     interval_width = upper_bound - lower_bound
-    std = interval_width / (2 * ss.norm.ppf(0.975))
+    std = round(interval_width / (2 * ss.norm.ppf(0.975)), 4)
     return std
 
 def expected_sharpe_ratio(stock):
@@ -290,6 +290,7 @@ def expected_sharpe_ratio(stock):
     expected_sd = expected_std(stock)
     expected_sharpe = expected_return / expected_sd
     expected_sharpe *= math.sqrt(250 / len(pd.read_csv(f"prediction_data/{stock}_mu.csv").x))
+    expected_sharpe = round(expected_sharpe, 2)
     return expected_sharpe
 
 # For debugging

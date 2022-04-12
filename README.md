@@ -1,4 +1,4 @@
-**CSCI3100 Project - StockStalker**
+# CSCI3100 Project - StockStalker
 
 This project aims to create a platform that provides information on Hong Kong and US stock markets for people with interest in finance. The core features of the application include providing quantitative predictions on stock price returns and risks, and a comment section for users to share their qualitative and quantitative views on historical and predicted stock price movements for each stock. 
 
