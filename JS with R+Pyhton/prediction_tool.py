@@ -292,7 +292,6 @@ def expected_sharpe_ratio(stock):
     expected_sharpe *= math.sqrt(250 / len(pd.read_csv(f"prediction_data/{stock}_mu.csv").x))
     return expected_sharpe
 
-# For debugging
 stock = sys.argv[1]
 valueofCI = float(sys.argv[2])
 #although the input is number in js, it becomes str when go to python
