@@ -604,7 +604,7 @@ input[type = 'search']::-webkit-search-cancel-button{
   outline: none;
   position: absolute;
   margin-left: 550px;
-  margin-top: -67px;
+  margin-top: -46px;
   left:0px;
   display: inline;
 }
@@ -892,4 +892,10 @@ h4{
 
 #predict_num_data {
   display: block;
+}
+
+
+
+.lastla{
+  display: inline-block;
 }

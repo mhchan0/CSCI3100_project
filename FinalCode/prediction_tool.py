@@ -275,15 +275,15 @@ def expected_sharpe_ratio(stock):
     return expected_sharpe
 
 # For debugging
-stock = "AAPL"
-
-price_lower, price_upper = price_confidence_interval(stock, CI=0.95, plot_graph=True)
-return_lower, return_upper = return_confidence_interval(stock, CI=0.95)
+#stock = "AAPL"
+stock = sys.argv[1]
+price_lower, price_upper = price_confidence_interval(stock, CI=float(sys.argv[2]), plot_graph=True)
+return_lower, return_upper = return_confidence_interval(stock, CI=float(sys.argv[2]))
 
 print(f"Confidence Interval (Price): (${round(price_lower, 2)}, ${round(price_upper, 2)})")
 print(f"Confidence Interval (Return): ({round(100 * return_lower, 2)}%, {round(100 * return_upper, 2)}%)")
-print(f"Value at Risk ($): ${round(VaR_price(stock, param=0.95), 2)}")
-print(f"Value at Risk (%): {round(100 * VaR_percent(stock, param=0.95), 2)}%")
+print(f"Value at Risk ($): ${round(VaR_price(stock, param=float(sys.argv[3])), 2)}")
+print(f"Value at Risk (%): {round(100 * VaR_percent(stock, param=float(sys.argv[3])), 2)}%")
 print(f"Expected Log Return: {round(100 * expected_log_return(stock), 2)}%")
 print(f"Expected Price: ${round(expected_price(stock), 2)}")
 print(f"Standard Deviation (Return): {round(expected_std(stock), 4)}")

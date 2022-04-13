@@ -109,6 +109,7 @@ class Predict extends Component {
             
             this.setState({...this.state, dataget: res.data});
             this.setState({...this.state, stockname: this.stock_url});
+            window.location.reload();
         });
     }
 

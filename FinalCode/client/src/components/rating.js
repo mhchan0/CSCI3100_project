@@ -81,6 +81,7 @@ class Rating extends Component {
 
             this.getRating();
             this.state.clicked = 1;
+            window.location.reload();
             return;
         }
 

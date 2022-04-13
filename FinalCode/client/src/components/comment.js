@@ -131,7 +131,7 @@ class Comment extends Component {
 
       
       return (
-        <h1 id='hide_stock'>{this.stockname} ( {hide_stock} )</h1>
+        <h1 className='lastla'>{this.stockname} ( <div className='lastla' id='hide_stock'>{hide_stock}</div> )</h1>
       );
   }
 
