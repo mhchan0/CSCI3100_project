@@ -10,7 +10,7 @@ One should note that information provided in this software is not investment adv
 To run the server & client:
 1. python data_downloader.py (to download newest data)
 2. npm install (to install modules)
-3. python stockdb.py (to make stock csv to database)
+3. python stockdb.py (to input stock list to database)
 4. npm run dev (to run both server and client)
 5. visit http://localhost:3000/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
