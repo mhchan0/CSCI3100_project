@@ -6,7 +6,7 @@ const Rating = require('../models/rating');
 
 
 router.get('/', (req, res) => {
-
+    //find all ratings
     Rating.find({  })
         .then((data) => {
             //console.log('Data: ', data);
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/all/:stock', (req, res) => {
-    Rating.find(req.params)
+    Rating.find(req.params)//find ratings of a stock
         .then((data) => {
             //console.log('Data: ', data);
             res.json(data);
@@ -28,7 +28,7 @@ router.get('/all/:stock', (req, res) => {
         });
 });
 
-router.get('/:stock/:username', (req, res) => {
+router.get('/:stock/:username', (req, res) => {//find ratings of a stock with particular username
     Rating.findOne({username: req.params.username, stock: req.params.stock})
         .then((data) => {
             //console.log('Data: ', data);
@@ -44,7 +44,7 @@ router.get('/:stock/:username', (req, res) => {
         });
 });
 
-router.post('/save', (req, res) => {
+router.post('/save', (req, res) => {//save rating 
     const data = req.body;
 
     const newComment = new Rating(data);
@@ -62,7 +62,7 @@ router.post('/save', (req, res) => {
 });
 
 router.route('/update').put((req, res, next) => {
-    try{
+    try{//update rating 
         Rating.findOneAndUpdate( {username: req.body.username, stock: req.body.stock} , {
             $set: req.body
             }, {

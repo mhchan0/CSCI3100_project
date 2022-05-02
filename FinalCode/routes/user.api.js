@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 
 router.get('/', (req, res) => {
-
+    //find all users
     User.find({  })
         .then((data) => {
             //console.log('Data: ', data);
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:username', (req, res) => {
-
+    //find user with username
     User.find(req.params)
         .then((data) => {
             //console.log('Data: ', data);
@@ -30,7 +30,7 @@ router.get('/:username', (req, res) => {
 });
 
 router.get('/findemail/:email', (req, res) => {
-
+    //find email
     User.find(req.params)
         .then((data) => {
             //console.log('Data: ', data);
@@ -43,7 +43,7 @@ router.get('/findemail/:email', (req, res) => {
 
 router.post('/save', (req, res) => {
     const data = req.body;
-
+    //save
     const newUser = new User(data);
 
     newUser.save((error) => {
@@ -59,7 +59,7 @@ router.post('/save', (req, res) => {
 });
 
 router.route('/uploadphoto').put((req, res, next) => {
-    try{
+    try{//update icon of user
         User.findOneAndUpdate( {username: req.body.username} , {
             photo: req.body.photo
             }, {
@@ -80,7 +80,7 @@ router.route('/uploadphoto').put((req, res, next) => {
 });
 
 router.route('/updatetheme').put((req, res, next) => {
-    try{
+    try{//update theme of user
         User.findOneAndUpdate( {username: req.body.username} , {
             theme: req.body.theme
             }, {
@@ -101,7 +101,7 @@ router.route('/updatetheme').put((req, res, next) => {
 });
 
 router.route('/updatepwd').put((req, res, next) => {
-    try{
+    try{//update password of user
         User.findOneAndUpdate( {username: req.body.username} , {
             password: req.body.password
             }, {
@@ -122,7 +122,7 @@ router.route('/updatepwd').put((req, res, next) => {
 });
 
 router.route('/changeusertype').put((req, res, next) => {
-    try{
+    try{//change user type of user
         User.findOneAndUpdate( {username: req.body.username} , {
             usertype: req.body.usertype
             }, {

@@ -5,7 +5,7 @@ const router = express.Router();
 const Stock = require('../models/stock');
 
 router.get('/', (req, res) => {
-
+    //find all stocks
     Stock.find({  })
         .then((data) => {
             //console.log('Data: ', data);
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:Symbol', (req, res) => {
+router.get('/:Symbol', (req, res) => {//find one stock contains similar string in name or symbol(search bar)
     Stock.findOne({ "$or": [ {"Symbol" : { $regex: req.params.Symbol , $options: 'i'}}, 
     {"Name" : { $regex: req.params.Symbol , $options: 'i'}}]})
         .then((data) => {
@@ -33,7 +33,7 @@ router.get('/:Symbol', (req, res) => {
         });
 });
 
-router.get('/search/:Symbol', (req, res) => {
+router.get('/search/:Symbol', (req, res) => {//find all stocks contain similar string in their names or symbols(search bar)
     Stock.find({ "$or": [ {"Symbol" : { $regex: req.params.Symbol , $options: 'i'}}, 
     {"Name" : { $regex: req.params.Symbol , $options: 'i'}}]})
         .then((data) => {
@@ -50,7 +50,7 @@ router.get('/search/:Symbol', (req, res) => {
         });
 });
 
-router.get('/find/:Symbol', (req, res) => {
+router.get('/find/:Symbol', (req, res) => {//find one stock with stock symbol, return name
 
     Stock.findOne(req.params)
         .then((data) => {
@@ -67,7 +67,7 @@ router.get('/find/:Symbol', (req, res) => {
         });
 });
 
-router.post('/save', (req, res) => {
+router.post('/save', (req, res) => {//save stock
     const data = req.body;
 
     const newComment = new Stock(data);
@@ -87,7 +87,7 @@ router.post('/save', (req, res) => {
 
 
 router.route('/update').put((req, res, next) => {
-    try{
+    try{//update a stock rating with username and stock symbol
         Stock.findOneAndUpdate( {username: req.body.username, stock: req.body.stock} , {
             $set: req.body
             }, {

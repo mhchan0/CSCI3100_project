@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:username/:stock_asc', (req, res) => {
+router.get('/:username/:stock_asc', (req, res) => {//find stock symbol, sort in ascending order
     Bookmark.find({username: req.params.username}).sort({"stock": req.params.stock_asc})
         .then((data) => {
             //console.log('Data: ', data);
@@ -29,7 +29,7 @@ router.get('/:username/:stock_asc', (req, res) => {
 });
 
 router.route('/find/:username/:stock').get((req, res, next) => {
-    try{
+    try{//find the marked stock for a user
         Bookmark.findOne( {username: req.params.username, stock: req.params.stock}
             ,(error, data) => {
             if (error) {
@@ -66,7 +66,7 @@ router.post('/save', (req, res) => {
 });
 
 router.route('/update').put((req, res, next) => {
-    try{
+    try{//update bookmark
         Bookmark.findOneAndUpdate( {username: req.body.username, stock: req.body.stock} , {
             $set: req.body
             }, {
@@ -86,7 +86,7 @@ router.route('/update').put((req, res, next) => {
 });
 
 router.route('/delete').put((req, res, next) => {
-    try{
+    try{//delete bookmark
         Bookmark.findOneAndDelete( {username: req.body.username, stock: req.body.stock},(error, data) => {
             if (error) {
                 return next(error);
