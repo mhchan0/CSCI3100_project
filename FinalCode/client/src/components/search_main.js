@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 import axios from 'axios';
@@ -23,7 +23,7 @@ class Home extends Component {
         });
       };
 
-    handleSearchChange = (e) => {
+    handleSearchChange = (e) => {//handle search bar change
         this.setState({
           stock: e.target.value
         });
@@ -52,7 +52,7 @@ class Home extends Component {
         } 
       };
 
-    getStock = () => {
+    getStock = () => {//search for related stocks
       axios.get('/stocks')
             .then((response) => {
                 const data = response.data;
@@ -72,7 +72,7 @@ class Home extends Component {
             });
     }
 
-    init = () =>{
+    init = () =>{//initialize the stock list
       axios.get('/stocks')
             .then((response) => {
                 const data = response.data;
@@ -95,13 +95,13 @@ class Home extends Component {
     }
 
 
-    submit = (event) => {
+    submit = (event) => {//on submit(search bar)
         if (this.state.stock === "") {
           return;
         }
         event.preventDefault();
         this.resetUserInputs();
-        if (this.current_user !== null) {
+        if (this.current_user !== null) {//redirect
           window.location.replace("/search/"+this.current_user+"/"+this.state.stock);
         }
         else {
@@ -109,7 +109,7 @@ class Home extends Component {
         }
     }
 
-    returnCurrentStock = () => {
+    returnCurrentStock = () => {//return current stock
         const { stock } = useParams();
         const hide_stock = stock;
         return (
@@ -117,7 +117,7 @@ class Home extends Component {
         );
     }
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//return current user
 
       this.current_user = localStorage.getItem("loggedIn");
 
@@ -125,7 +125,7 @@ class Home extends Component {
     }
 
 
-    displayStocks = (marks) => {
+    displayStocks = (marks) => {//display stock list
 
       if (!marks.length) return null;
       
@@ -140,9 +140,9 @@ class Home extends Component {
   }
 
 
-  handleClick = (username, stock) => {
+  handleClick = (username, stock) => {//onclick (particular stock)
 
-    if (this.current_user !== null) {
+    if (this.current_user !== null) {//redirect
       window.location.replace("/search/"+username+"/"+stock);
     }
     else {
@@ -150,12 +150,12 @@ class Home extends Component {
     }
   }
 
-  handleSearchbar=()=>{
+  handleSearchbar=()=>{//search button
     if (this.state.stock === "") {
       return;
     }
 
-    if (this.current_user !== null) {
+    if (this.current_user !== null) {//redirect
       window.location.replace("/search/"+this.current_user+"/"+this.state.stock);
     }
     else {

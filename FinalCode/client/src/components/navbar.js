@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class Navigation extends Component {
 
-    setTheme(theme) {
+    setTheme(theme) {//set theme
         if (theme === "day"){
             document.documentElement.style
             .setProperty("--main-color", "white");
@@ -31,10 +31,10 @@ class Navigation extends Component {
         }
     }
 
-    initTheme = () => {
+    initTheme = () => {//initialize theme 
         const { username } = useParams();
         if (username) {
-            let theme = -1;
+            let theme = -1;//get the theme of user
             axios.get('/users/' + username)
                 .then((response) => {
                     const data = response.data[0];
@@ -63,7 +63,7 @@ class Navigation extends Component {
     current_user = '';
     user_icon = '/img/guest.jpg';
 
-    componentDidMount = (e) => {
+    componentDidMount = (e) => {//react procedure
         const element = document.getElementById("hide_name");
         if (element) {
             this.current_user = element.innerHTML;
@@ -71,7 +71,7 @@ class Navigation extends Component {
         this.getIcon();
     }
 
-    openLogoutButton = (e) => {
+    openLogoutButton = (e) => {//open logout button
         const element = document.getElementById("logout_bar");
         if (element != null) {
             const logout_e = document.getElementById("logout_link");
@@ -82,7 +82,7 @@ class Navigation extends Component {
         }     
     }
 
-    closeLogoutButton = (e) => {
+    closeLogoutButton = (e) => {//close logout button
         const logout_e = document.getElementById("logout_link");
         if (logout_e != null) {
             logout_e.style.display = "none";
@@ -90,8 +90,8 @@ class Navigation extends Component {
         }
     }
 
-    getIcon = () => {
-        if (this.current_user !== "") {
+    getIcon = () => {//get icon
+        if (this.current_user !== "") {//get from database
             axios.get('/users/'+this.current_user)
             .then((response) => {
                 const recv = response.data[0].photo;
@@ -110,7 +110,7 @@ class Navigation extends Component {
         }
     }
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//get current user
         const { username } = useParams();
         if (username) {
             const hide_name = username;
@@ -126,7 +126,7 @@ class Navigation extends Component {
         }
     }
 
-   showNavbar = () => {
+   showNavbar = () => {//show the navbar (left)
         const { username } = useParams();
 
         if (username) {
@@ -135,7 +135,7 @@ class Navigation extends Component {
 
             const user_type = localStorage.getItem("type");
             if (user_type === "1") {
-            
+                //return html code
                 return (
                     <div class="sidebar">
                         <Link to={"/home/"+this.current_user} style={{ textDecoration: 'none' }} className="link" id="home_link">Home</Link>
@@ -201,7 +201,7 @@ class Navigation extends Component {
         }
     }
 
-    checkUser = () => {
+    checkUser = () => {//check if user has logged in
         const { username } = useParams();
         if (username) {
             if (localStorage.getItem("loggedIn") !== username) {

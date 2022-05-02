@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 class StockInfo extends Component {
@@ -21,7 +20,7 @@ class StockInfo extends Component {
         
     }
 
-    getData = () => {
+    getData = () => {//get stock data 
         const element = document.getElementById("hide_stock");
         if (element) {
 
@@ -49,12 +48,12 @@ class StockInfo extends Component {
         }
     }
 
-    onClickLeft = () => {
+    onClickLeft = () => {//click to see data of previous day
         this.previous--;
         this.getData();
     }
 
-    onClickRight = () => {
+    onClickRight = () => {//click to see data of next day
         this.previous++;
         if (this.previous >= 0) {
             this.previous = -1;

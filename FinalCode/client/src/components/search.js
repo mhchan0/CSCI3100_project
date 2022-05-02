@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
-import Navbar from './navbar';
+import { useParams } from "react-router-dom";
 import Logout from './logout';
 import Comment from './comment';
 
@@ -25,11 +24,11 @@ class Search extends Component {
       };
 
 
-    submit = (event) => {
+    submit = (event) => {//on submit
         event.preventDefault();
 
         this.resetUserInputs();
-        if (this.current_user !== null) {
+        if (this.current_user !== null) {//redirect
           window.location.replace("/search/"+this.current_user+"/"+this.state.stock);
         }
         else {
@@ -38,7 +37,7 @@ class Search extends Component {
     }
 
 
-    returnCurrentStock = () => {
+    returnCurrentStock = () => {//return current stock
         const { stock } = useParams();
         const hide_stock = stock;
         return (
@@ -46,14 +45,14 @@ class Search extends Component {
         );
     }
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//get current user
 
       this.current_user = localStorage.getItem("loggedIn");
 
       return;
     }
 
-    handleSearchbar=()=>{
+    handleSearchbar=()=>{//search
       if (this.state.stock === "") {
         return;
       }

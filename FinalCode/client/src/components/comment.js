@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useHistory } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Rating from './rating';
 import Navbar from './navbar';
 import Predict from './predict';
@@ -9,10 +9,7 @@ import StockInfo from './stockinfo'
 class Comment extends Component {
   constructor(props) {
     super(props);
-    //this.getComment();
-    //this.displayComment();
-    //check if error?
-    //this.checkexist();
+
   }
   state = {
     username:'',
@@ -33,13 +30,11 @@ class Comment extends Component {
   mark= false;
   componentDidMount = () => {
     this.getComment();
-    //if error :
-    //this.checkexist();
-    //this.returnCurrentStockName();
+
   };
 
 
-  getComment = () => {
+  getComment = () => { //to get comments
     if (this.state.stock !== ''){
 
     axios.get('/comments/'+this.state.stock)
@@ -57,14 +52,14 @@ class Comment extends Component {
   }
 
 
-  handleCommentChange = (e) => {
+  handleCommentChange = (e) => {//handle comment change
     this.setState({
       body: e.target.value
     });
   };
 
 
-  submit = (event) => {
+  submit = (event) => {//click submit to use this function
     if (this.username_url === null) {
       alert("Please log in to comment!");
     }
@@ -73,7 +68,7 @@ class Comment extends Component {
 
     let date = new Date();
 
-    const payload = {
+    const payload = {//make payload for sending to server
       username: this.state.username,
       body: this.state.body,
       stock: this.state.stock,
@@ -84,7 +79,7 @@ class Comment extends Component {
     
     if (payload.body !== '') {
 
-      axios({
+      axios({//sent to server
         url: '/comments/save',
         method: 'POST',
         data: payload
@@ -102,14 +97,14 @@ class Comment extends Component {
   };
 
 
-  resetUserInputs = () => {
+  resetUserInputs = () => {//reset user input
     this.setState({
       body: ''
     });
   };
 
 
-  displayComment = (posts) => {
+  displayComment = (posts) => {//display comments
 
     if (!posts.length) return null;
 
@@ -123,20 +118,20 @@ class Comment extends Component {
   }
 
 
-  returnCurrentStock = () => {
+  returnCurrentStock = () => {//show current stock name and symbol
       const { stock } = useParams();
       const hide_stock = stock;
       this.stock_url = hide_stock;
       this.state.stock = this.stock_url;
 
-      
+      //show by html code
       return (
         <h1 className='lastla'>{this.stockname} ( <div className='lastla' id='hide_stock'>{hide_stock}</div> )</h1>
       );
   }
 
 
-  returnCurrentUser = () => {
+  returnCurrentUser = () => {//return current user
       const { username } = useParams();
       const hide_username = username;
       this.username_url = hide_username;
@@ -147,7 +142,7 @@ class Comment extends Component {
   }
 
 
-  returnCurrentStockName = () => {
+  returnCurrentStockName = () => {//return current stock name
     const { stock } = useParams();
     const hide_stockname = stock;
     this.stockname_url = hide_stockname;
@@ -155,22 +150,22 @@ class Comment extends Component {
   }
 
 
-  checkexist= ()=> {
+  checkexist= ()=> {// check if stock exist
     if (this.stockname_url!==''){
-      axios.get('/stocks/'+this.stockname_url)
+      axios.get('/stocks/'+this.stockname_url)//get related stock symbol
       .then((response) => {
         const data = response.data;
         this.stockname = data.Name;
         
         if (this.state.stock !== data.Symbol){
-          if (data !== 0){
+          if (data !== 0){//if we found out the related stock
             if (this.username_url !== null) {
               window.location.replace("/search/"+this.username_url+"/"+data.Symbol);
             }
             else {
               window.location.replace("/search/"+data.Symbol);
             }
-          }else{
+          }else{// if not such stock
             alert('No similar stock.');
             if (this.username_url !== null) {
               window.location.replace("/search_main/"+this.username_url); 
@@ -184,7 +179,7 @@ class Comment extends Component {
       })
       .catch(() => {
 
-        if (this.username_url !== null) {
+        if (this.username_url !== null) {//redirect when error occur
           window.location.replace("/search_main/"+this.username_url);
         }
         else {
@@ -193,7 +188,7 @@ class Comment extends Component {
       });
     }
 
-    if (this.stockname === 0){
+    if (this.stockname === 0){//if redirection not working, redirect again
       alert("No such stock");
       if (this.username_url !== null) {
         window.location.replace("/search_main/"+this.username_url);
@@ -206,7 +201,7 @@ class Comment extends Component {
   }
 
 
-  submitmark =(event)=>{
+  submitmark =(event)=>{//submit record of bookmark for user
     event.preventDefault();
     const payload = {
       username: this.state.username,
@@ -216,9 +211,9 @@ class Comment extends Component {
     this.mark= !this.mark ;
     
     var property = document.getElementById("btn");
-    if (this.mark) {
+    if (this.mark) {//if not marked, update mark to db. if marked,  unmark it
       property.style.backgroundColor = "#ffee00";
-      axios({
+      axios({//send to db
           url: '/bookmark/update',
           method: 'put',
           data: payload
@@ -233,7 +228,7 @@ class Comment extends Component {
     }
     else {
         property.style.backgroundColor = "transparent";
-        axios({
+        axios({//del from db
             url: '/bookmark/delete',
             method: 'put',
             data: payload
@@ -250,7 +245,7 @@ class Comment extends Component {
   }
   
 
-  returnCurrentMark = () => {
+  returnCurrentMark = () => {// return current mark
     if (this.stockname_url!==''){
     axios.get('/bookmark/find/'+this.username_url+'/'+this.stockname_url)
       .then((response) => {
@@ -276,7 +271,7 @@ class Comment extends Component {
   }
 
 
-  returnBookmark = () => {
+  returnBookmark = () => {//return bookmark in html code
     const { username } = useParams();
     if (username !== undefined) {
       return (
@@ -289,7 +284,7 @@ class Comment extends Component {
     } 
   }
 
-  returnTextArea = () => {
+  returnTextArea = () => {//return text area in html code
     if (this.username_url !== null) {
       return (
         <textarea className="write_comment"

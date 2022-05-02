@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 import axios from 'axios';
@@ -22,13 +21,13 @@ class Home extends Component {
         this.getMarks();
     }
 
-    componentDidMount = () => {
+    componentDidMount = () => {//react procedure
         this.getMarks();
 
     };
 
 
-    getMarks = () => {
+    getMarks = () => {//to get highest comments stock
         if (this.username_url !== ''){
 
             axios.get('/comments/highest/comment')
@@ -57,7 +56,7 @@ class Home extends Component {
       }
 
 
-    displayMarks = (marks) => {
+    displayMarks = (marks) => {//display stocks(highest comments)
 
         if (!marks.length) return null;
         
@@ -72,7 +71,7 @@ class Home extends Component {
     }
     
 
-    findStockName =(stockname_url) => {
+    findStockName =(stockname_url) => {//find stock name with stock symbol
         axios.get('/stocks/find/'+stockname_url)
         .then((response) => {
             const data = response.data;
@@ -90,7 +89,7 @@ class Home extends Component {
     }
 
 
-    handleClick = (username, stock) => {
+    handleClick = (username, stock) => {//onclick, redirect
         if (username !== null) {
             window.location.replace("/search/"+username+"/"+stock);
         }
@@ -100,23 +99,15 @@ class Home extends Component {
     }
 
 
-    returnCurrentUser = () => {
-        const { username } = useParams();
-        const hide_username = username;
-        this.username_url = hide_username;
-        return 0;
-    }
 
 
-
-
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {// to get current user
         this.username_url = localStorage.getItem("loggedIn");
         return;
     }
 
 
-    gopop = () =>{
+    gopop = () =>{//redirect to popular stock page
         if (this.username_url !== null) {
             window.location.replace("/home/"+this.username_url+"/popular");
         }
@@ -125,7 +116,7 @@ class Home extends Component {
         }
     }
 
-    gomark = () =>{
+    gomark = () =>{//redirect to marked stock page (home page)
         if (this.username_url !== null) {
             window.location.replace("/home/"+this.username_url);
         }

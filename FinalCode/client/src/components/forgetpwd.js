@@ -11,13 +11,13 @@ class ForgetPwd extends Component {
         email: "",
     }
 
-    handlEmailChange = (e) => {
+    handlEmailChange = (e) => {//handle email bar change
         this.setState({
             email: e.target.value
         });
     }
 
-    clearText = () => {
+    clearText = () => {//clear text 
 
         this.setState({
             email: ""
@@ -29,13 +29,13 @@ class ForgetPwd extends Component {
         }
     }
 
-    submit = () => {
+    submit = () => {//on submit
         if (this.state.email === "") {
             alert("Please input your email.");
             this.clearText();
             return;
         }
-
+        //search for email
         axios.get('/users/findemail/' + this.state.email)
         .then((res) => {
             const data = res.data;
@@ -55,7 +55,7 @@ class ForgetPwd extends Component {
                     link: "http://localhost:3000/resetpwd/" + username + "/" + id
                 }
 
-                axios({
+                axios({//email exist, then change password
                     url: '/users/changeusertype',
                     method: 'PUT',
                     data: sendData

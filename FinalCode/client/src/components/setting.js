@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link ,useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 
@@ -30,7 +29,7 @@ class Setting extends Component {
 
     flag = 0;
 
-    setTheme(theme) {
+    setTheme(theme) {//set theme
         if (theme === "day"){
             document.documentElement.style
             .setProperty("--main-color", "white");
@@ -58,13 +57,13 @@ class Setting extends Component {
     }
 
 
-    handlebuttonchange(light1) {
-        if (light1 === 1){
+    handlebuttonchange(light1) {//change theme(button)
+        if (light1 === 1){//if day theme
             this.light = -1;
             this.color = "white";
             this.setTheme("day");
         }
-        else if (light1 === -1){
+        else if (light1 === -1){//if dark theme
             this.light = 1;
             this.color = "dark";
             this.setTheme("night");
@@ -75,7 +74,7 @@ class Setting extends Component {
             theme: this.light
         }
 
-        if (payload.body !== '') {
+        if (payload.body !== '') {//record the user's theme
             axios({
                 url: '/users/updatetheme',
                 method: 'PUT',
@@ -91,7 +90,7 @@ class Setting extends Component {
 
     }
 
-    handleImageChaneg = (e) => {
+    handleImageChaneg = (e) => {//change icon
         if (e.target.files) {
             this.setState({
                 icon: e.target.files[0]
@@ -107,14 +106,14 @@ class Setting extends Component {
         }
     }
 
-    clickButton = (e) => {
+    clickButton = (e) => {//upload photo button
         const element = document.getElementById("upload_button");
         if (element) {
             element.click();
         }
     }
 
-    submit = (e) => {
+    submit = (e) => {//upload new icon
         var data = new FormData();
         data.append("file", this.state.icon);
         console.log(this.state.icon);
@@ -144,7 +143,7 @@ class Setting extends Component {
         }
     }
 
-    initialSwitch = () => {
+    initialSwitch = () => {//initialize the theme switch according to user's theme record in db
         const { username } = useParams();
         axios.get('/users/' + username)
         .then((response) => {
@@ -169,7 +168,7 @@ class Setting extends Component {
 
     }
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//return current user
         const { username } = useParams();
         const hide_name = username;
         return (
@@ -177,14 +176,14 @@ class Setting extends Component {
         );
     }
 
-    showPasswordPage = () => {
+    showPasswordPage = () => {//show password page
         const element = document.getElementById("password_page");
         if (element) {
             element.style.display = "block";
         }
     }
 
-    closePasswordPage = () => {
+    closePasswordPage = () => {//close password page
         const opwd = document.getElementById("old_pwd");
         if (opwd) {
             opwd.value = "";
@@ -206,28 +205,27 @@ class Setting extends Component {
         });
     }
 
-    handleOpwdChange = (e) => {
+    handleOpwdChange = (e) => {//handle old password bar change
         this.setState({
             old_password: e.target.value
         });
 
     }
 
-    handleNpwdChange = (e) => {
+    handleNpwdChange = (e) => {//handle new password bar change
         this.setState({
             new_password: e.target.value
         });
 
     }
 
-    submitpwd = () => {
+    submitpwd = () => {//submit new password(update passoword)
 
         if (this.state.new_password === '') {
             alert("New password can not be empty!");
             return;
         }
 
-        //this.loadPage();
 
         axios.get('/users/' + this.state.username)
             .then((response) => {
@@ -246,13 +244,13 @@ class Setting extends Component {
                     })
                     .then(() => {
                         console.log("Password is updated.");
-                        //this.finishLoad();
+                        
                         alert("Password is updated.");
                         this.closePasswordPage();
                     })
                     .catch(() => {
                         console.log("Fail to update password.");
-                        //this.finishLoad();
+                        
                         alert("Fail to update password. Pleace try again.");
                         this.setState({
                             old_password: '',
@@ -272,7 +270,7 @@ class Setting extends Component {
 
                 }
                 else {
-                    //this.finishLoad();
+                    
                     alert("Current password is incorrect!");
                     this.setState({
                         old_password: '',
@@ -293,7 +291,7 @@ class Setting extends Component {
                 }
             })
             .catch(() => {
-                //this.finishLoad();
+                
                 alert("Fail to update password. Pleace try again.");
                 this.setState({
                     old_password: '',
@@ -312,27 +310,22 @@ class Setting extends Component {
             });
     }
 
-    loadPage = () => {
+    loadPage = () => {//load style
         const load = document.getElementById("loading_page");
         if (load) {
             load.style.display = "block";
         }
         
-        /*
-        <div id="loading_page">
-            <div id="loading"></div>
-        </div>
-        */ 
     }
 
-    finishLoad = () => {
+    finishLoad = () => {//finish load style
         const load = document.getElementById("loading_page");
         if (load) {
             load.style.display = "none";
         }
     }
 
-    leavepwd = () => {
+    leavepwd = () => {//close password page
         const t = this;
         window.onclick = function(event) {
             if (event.target === document.getElementById("password_page")) {
@@ -341,7 +334,7 @@ class Setting extends Component {
         }
     }
 
-    click_logout = () => {
+    click_logout = () => {//click logout
         localStorage.clear();
         window.location.replace("/");
     }

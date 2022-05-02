@@ -1,6 +1,6 @@
 import react, { Component } from 'react';
 import axios from 'axios';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 class Rating extends Component {
     
@@ -18,7 +18,7 @@ class Rating extends Component {
 
 
 
-    componentDidMount = () => {
+    componentDidMount = () => {//react procedures
 
         this.displayRating();
         this.getRating();
@@ -26,7 +26,7 @@ class Rating extends Component {
     };
     
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//get current user and stock symbol
 
         const { username, stock } = useParams();
         const hide_username = username;
@@ -39,7 +39,7 @@ class Rating extends Component {
     }
 
 
-    getRating = () => {
+    getRating = () => {//get rating of stock
         axios.get('/ratings/all/'+this.state.stock)
         .then((response) => {
             const recv = response.data;
@@ -52,7 +52,7 @@ class Rating extends Component {
     }
 
 
-    submit = (event) => {
+    submit = (event) => {//on submit, update rating
 
         if (this.state.username !== undefined) {
         if (this.flag !== 0) {
@@ -67,7 +67,7 @@ class Rating extends Component {
               stock: this.state.stock
             };
         
-            axios({
+            axios({//send the rating to server
                 url: '/ratings/update',
                 method: 'put',
                 data: payload
@@ -94,7 +94,7 @@ class Rating extends Component {
 
 
 
-    displayAvg = (ratings) => {
+    displayAvg = (ratings) => {//display average rating of stock
         if (!ratings.length) return "No one has rated yet";
 
         let sum = 0;
@@ -116,7 +116,7 @@ class Rating extends Component {
     }
 
 
-    clickStar = () => {
+    clickStar = () => {//onclick rating star
         react.useEffect(() => {
             if (this.flag === 0) {
                 if (this.state.rating !== 0) {
@@ -131,7 +131,7 @@ class Rating extends Component {
     }
     
 
-    displayRating = (rating) => {
+    displayRating = (rating) => {//display rating of stock
 
         if (this.state.username === undefined) {
             return (
@@ -141,7 +141,7 @@ class Rating extends Component {
             );
         }
 
-        if (this.flag === 0){
+        if (this.flag === 0){// if user have logged in
         if (this.state.stock !== ''){
         if (this.state.username !== ''){
         axios.get('/ratings/'+this.state.stock+'/'+this.state.username)
@@ -153,7 +153,7 @@ class Rating extends Component {
         .catch((err) => {
             console.log(err);
         });}}
-        if (this.rating === 0){
+        if (this.rating === 0){//if user have not rated yet
             return (
                 <div>
                   <p>You have not rated</p>
@@ -167,7 +167,7 @@ class Rating extends Component {
         );
         }
         
-        }else if (this.flag === 1){
+        }else if (this.flag === 1){//user not logged in 
         if (this.rating === 0 && rating === 0) {
 
             return (
@@ -198,7 +198,7 @@ class Rating extends Component {
 
 
 
-    returnCurrentStock = () => {
+    returnCurrentStock = () => {//return current stock
 
         const { stock } = useParams();
         const hide_stock = stock;

@@ -10,7 +10,7 @@ class Verify extends Component {
         window.location.replace("/");
     }
 
-    verifyUser = () => {
+    verifyUser = () => {//verify user
         const { username, id} = useParams();
 
         const sendData = {
@@ -26,7 +26,7 @@ class Verify extends Component {
                     this.click();
                     return;
                 }
-                if (data[0].usertype === -1) {
+                if (data[0].usertype === -1) {//change user type
                     axios({
                         url: '/users/changeusertype',
                         method: 'PUT',

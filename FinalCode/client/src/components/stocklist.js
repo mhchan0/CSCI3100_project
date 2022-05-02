@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 import axios from 'axios';
@@ -19,13 +19,13 @@ class Stocklist extends Component {
         this.getMarks();
     }
 
-    componentDidMount = () => {
+    componentDidMount = () => {//react procedure
         this.getMarks();
 
     };
 
 
-    getMarks = () => {
+    getMarks = () => {//get all stocks symbols
         if (this.username_url !== ''){
 
             axios.get('/stocks')
@@ -36,7 +36,7 @@ class Stocklist extends Component {
 
                     this.setState({marks: data});
 
-                    this.findStockName();
+                    this.findStockName();//find stock names by stock symbol
                 }else{
                     this.setState({marks: data});
 
@@ -53,7 +53,7 @@ class Stocklist extends Component {
       }
 
 
-    displayMarks = (marks) => {
+    displayMarks = (marks) => {//display the stocks
 
         if (!marks.length) return null;
         
@@ -68,7 +68,7 @@ class Stocklist extends Component {
     }
     
 
-    findStockName =() => {
+    findStockName =() => {//find stock name by stock symbol
         axios.get('/stocks')
         .then((response) => {
             const data = response.data;
@@ -93,7 +93,7 @@ class Stocklist extends Component {
     }
 
 
-    handleClick = (username, stock) => {
+    handleClick = (username, stock) => {//onclick, direct to stock page
         if (username !== null) {
             window.location.replace("/search/"+username+"/"+stock);
         }
@@ -103,15 +103,7 @@ class Stocklist extends Component {
     }
 
 
-    returnCurrentUser = () => {
-        const { username } = useParams();
-        const hide_username = username;
-        this.username_url = hide_username;
-        return 0;
-    }
-
-
-    change_asc = (e) => {
+    change_asc = (e) => {//ascending order or desc(symbol)
         this.setState({names: []});
         this.stock_asce = this.stock_asce * -1;
         if (this.sort_wt === 1){
@@ -127,11 +119,11 @@ class Stocklist extends Component {
             for (let i=0;i<this.state.marks.length;i++){
                 this.Arrr.push({Symbol: this.state.marks[i].Symbol, Name: this.state.names[i]});
             }
-            if (this.stock_asce === 1){
+            if (this.stock_asce === 1){//ascending
                 this.Arrr = this.Arrr.sort((a,b) => a.Name.localeCompare(b.Name));
 
             }
-            if (this.stock_asce === -1){
+            if (this.stock_asce === -1){//reverse if descending
                 this.Arrr = this.Arrr.sort((a,b) => a.Name.localeCompare(b.Name)).reverse();
 
             }
@@ -152,7 +144,7 @@ class Stocklist extends Component {
     }
 
 
-    change_name = (e) => {
+    change_name = (e) => {//asce or desc order(name)
         if (this.sort_wt === -1){
             this.sort_wt = this.sort_wt * -1;
 
@@ -168,11 +160,11 @@ class Stocklist extends Component {
         for (let i=0;i<this.state.marks.length;i++){
             this.Arrr.push({Symbol: this.state.marks[i].Symbol, Name: this.state.names[i]});
         }
-        if (this.stock_asce === 1){
+        if (this.stock_asce === 1){//if ascending
             this.Arrr = this.Arrr.sort((a,b) => a.Name.localeCompare(b.Name));
 
         }
-        if (this.stock_asce === -1){
+        if (this.stock_asce === -1){//reverse if descending
             this.Arrr = this.Arrr.sort((a,b) => a.Name.localeCompare(b.Name)).reverse();
 
         }
@@ -192,7 +184,7 @@ class Stocklist extends Component {
     }
 
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//return current user
         this.username_url = localStorage.getItem("loggedIn");
         return;
     }

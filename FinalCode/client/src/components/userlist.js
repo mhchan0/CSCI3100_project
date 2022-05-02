@@ -19,7 +19,7 @@ class Userlist extends Component {
         this.getUser();
     }
 
-    handleSearchChange = (e) => {
+    handleSearchChange = (e) => {//handle search bar change
 
         this.user = e.target.value;
         const bar = document.getElementsByClassName("list__display");
@@ -44,7 +44,7 @@ class Userlist extends Component {
         }
     };
 
-    getUser = () => {
+    getUser = () => {//get users
         axios.get("/users")
         .then((res) => {
             const data = res.data;
@@ -57,7 +57,7 @@ class Userlist extends Component {
         });
     }
     
-    displayUser = (list) => {
+    displayUser = (list) => {//display list of users
 
         if (!list.length) return null;
     
@@ -79,7 +79,7 @@ class Userlist extends Component {
         ));
     }
 
-    showPasswordPage = (e) => {
+    showPasswordPage = (e) => {//show password page
         if (e.target.id) {
             const element = document.getElementById("password_page");
             if (element) {
@@ -97,7 +97,7 @@ class Userlist extends Component {
         }
     }
 
-    clearText = () => {
+    clearText = () => {//clear text of old and new password bar
         const opwd = document.getElementById("old_pwd");
         if (opwd) {
             if (opwd.className === "list_old_pwd") {
@@ -118,7 +118,7 @@ class Userlist extends Component {
         });
     }
 
-    closePasswordPage = () => {
+    closePasswordPage = () => {//close password page
 
         this.clearText();
 
@@ -132,21 +132,21 @@ class Userlist extends Component {
         this.user_click = '';
     }
 
-    handleOpwdChange = (e) => {
+    handleOpwdChange = (e) => {//handle old password bar
         this.setState({
             old_password: e.target.value
         });
 
     }
 
-    handleNpwdChange = (e) => {
+    handleNpwdChange = (e) => {//handle new password bar
         this.setState({
             new_password: e.target.value
         });
 
     }
     
-    leavepwd = () => {
+    leavepwd = () => {//leave password page
         const t = this;
         window.onclick = function(event) {
             if (event.target === document.getElementById("password_page")) {
@@ -155,7 +155,7 @@ class Userlist extends Component {
         }
     }
 
-    submitpwd = () => {
+    submitpwd = () => {//submit new password
 
         if (this.state.old_password === '') {
             alert("Password can not be empty!");

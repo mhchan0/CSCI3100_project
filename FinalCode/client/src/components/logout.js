@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 class Logout extends Component {
 
-    openLogoutButton = (e) => {
+    openLogoutButton = (e) => {//open logout button
         const logout_e = document.getElementById("logout_link");
         if (logout_e != null) {
                 logout_e.style.display = "block";
@@ -11,7 +11,7 @@ class Logout extends Component {
         }     
     }
 
-    closeLogoutButton = (e) => {
+    closeLogoutButton = (e) => {//close logout button
         const logout_e = document.getElementById("logout_link");
         if (logout_e != null) {
             logout_e.style.display = "none";
@@ -19,11 +19,11 @@ class Logout extends Component {
         }
     }
 
-    click_logout = () => {
+    click_logout = () => {//click logout, clear localstorage(username record)
         localStorage.clear();
     }
 
-    leaveButton = () => {
+    leaveButton = () => {//logout button
         const { username } = useParams();
         if (username) {
             return (

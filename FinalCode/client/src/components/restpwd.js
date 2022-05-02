@@ -10,19 +10,19 @@ class Resetpwd extends Component {
         confirm_pwd: ""
     }
 
-    handlePwdChange = (e) => {
+    handlePwdChange = (e) => {//handle password change
         this.setState({
             password: e.target.value
         });
     }
 
-    handleCPwdChange = (e) => {
+    handleCPwdChange = (e) => {//handle confirm password change
         this.setState({
             confirm_pwd: e.target.value
         });
     }
 
-    clearText = () => {
+    clearText = () => {//clear text in password and confirm pw bar
         this.setState({
             username: "",
             email: "",
@@ -41,7 +41,7 @@ class Resetpwd extends Component {
         }
     }
 
-    submit = () => {
+    submit = () => {//on submit
 
         const element = document.getElementById("hide_name");
 
@@ -65,7 +65,7 @@ class Resetpwd extends Component {
                 password: this.state.password
             }
 
-            axios({
+            axios({//update password to server
                 url: '/users/updatepwd',
                 method: 'PUT',
                 data: sendData
@@ -115,7 +115,7 @@ class Resetpwd extends Component {
     }
 
 
-    check = () => {
+    check = () => {//check user
         const { username, id} = useParams();
 
         axios.get('/users/' + username)
@@ -142,7 +142,7 @@ class Resetpwd extends Component {
         })
     }
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//return current username
         const { username} = useParams();
         const hide_name = username;
         return (

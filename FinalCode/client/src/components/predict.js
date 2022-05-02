@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
-import Navbar from './navbar';
-import Logout from './logout';
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 
@@ -20,16 +18,10 @@ class Predict extends Component {
         }
 
     }
-    // state= {
-    //     stock: '',
-    //     CI: 0.95,
-    //     params: 0,
-    //     m: 7,
-    //     use_period: 125
-    // }
+    
     stock_url = '';
     img_url = '';
-    returnCurrentStock = () => {
+    returnCurrentStock = () => {//return current stock
         const { stock } = useParams();
         const hide_stock = stock;
         this.stock_url = hide_stock;
@@ -54,32 +46,32 @@ class Predict extends Component {
         }
       }
 
-    handleCIChange = (e) => {
+    handleCIChange = (e) => {//onchange, confidence interval
         super.setState({
           CI: e.target.value
         });
       };
 
-    handleParamsChange = (e) => {
+    handleParamsChange = (e) => {//onchange, params
         super.setState({
         params: e.target.value
     });
     };
 
-    handleMChange = (e) => {
+    handleMChange = (e) => {//onchange, M
         super.setState({
           m: e.target.value
         });
       };
 
-    handleUsePeriodChange = (e) => {
+    handleUsePeriodChange = (e) => {//onchange, period
         super.setState({
         use_period: e.target.value
     });
     };
 
 
-    submit = () => {
+    submit = () => {// on submit
         if ((this.state.CI <= 0) || (this.state.CI >= 100)) {
             alert("CI must be >0 and <100!");
             return;
@@ -104,16 +96,17 @@ class Predict extends Component {
             use_period: this.state.use_period
         };
         
-        axios.post("http://localhost:8080/prediction/test", payload, {})
+        axios.post("http://localhost:8080/prediction/test", payload, {})//send to server to get prediction
         .then(res => {
-            
+            this.setState({...this.state, dataget: res.data});
+            this.setState({...this.state, dataget: res.data});
             this.setState({...this.state, dataget: res.data});
             this.setState({...this.state, stockname: this.stock_url});
             window.location.reload();
         });
     }
 
-    displaydata = () =>{
+    displaydata = () =>{// to display predictions
         if (this.state.dataget === 1){
             return;
         }

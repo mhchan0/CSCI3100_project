@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link, useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 import axios from 'axios';
 
 class Home extends Component {
 
-    //yahooFinance = require('yahoo-finance');
+
     state = {
         marks:[],
         names:[],
@@ -28,7 +27,7 @@ class Home extends Component {
     };
 
 
-    getMarks = () => {
+    getMarks = () => {//get the marked stocks symbols
         if (this.username_url !== ''){
 
             axios.get('/bookmark/'+this.username_url+'/'+this.stock_asce)
@@ -37,7 +36,7 @@ class Home extends Component {
 
                 this.setState({marks: data});
                 for (let i=0; i<this.state.marks.length; i++){
-                    this.findStockName(this.state.marks[i].stock);
+                    this.findStockName(this.state.marks[i].stock);//find the stock names of found stock symbols
                 }
 
             })
@@ -49,7 +48,7 @@ class Home extends Component {
       }
 
 
-    displayMarks = (marks) => {
+    displayMarks = (marks) => {//display marked stocks
 
         if (!marks.length) return null;
         
@@ -64,7 +63,7 @@ class Home extends Component {
     }
     
 
-    findStockName =(stockname_url) => {
+    findStockName =(stockname_url) => {//find stock names by stock symbols
         axios.get('/stocks/find/'+stockname_url)
         .then((response) => {
             const data = response.data;
@@ -82,26 +81,18 @@ class Home extends Component {
     }
 
 
-    handleClick = (username, stock) => {
+    handleClick = (username, stock) => {//onclick
         window.location.replace("/search/"+username+"/"+stock);
     }
 
 
-    returnCurrentUser = () => {
-        const { username } = useParams();
-        const hide_username = username;
-        this.username_url = hide_username;
-        return 0;
-    }
 
-
-    change_asc = (e) => {
+    change_asc = (e) => {//change ascending order or descending order
         this.setState({names: []});
         this.stock_asce = this.stock_asce * -1;
         if (this.sort_wt === 1){
             this.getMarks();
         }else{
-            //this.setState({names: []});
             this.Arrr = [];
 
             //make a list , have Symbol and Name
@@ -132,7 +123,7 @@ class Home extends Component {
     }
 
 
-    change_name = (e) => {
+    change_name = (e) => {//change ascending order or descending order
         if (this.sort_wt === -1){
             this.sort_wt = this.sort_wt * -1;
             this.setState({names: []});
@@ -170,19 +161,19 @@ class Home extends Component {
     }
 
 
-    returnCurrentUser = () => {
+    returnCurrentUser = () => {//return current user
         this.username_url = localStorage.getItem("loggedIn");
         return;
     }
 
 
-    gopop = () =>{
+    gopop = () =>{//go to popular stock page
         if (this.username_url !== null) {
             window.location.replace("/home/"+this.username_url+"/popular");
         }
     }
 
-    gomark = () =>{
+    gomark = () =>{//go to home page(marked stock page)
         if (this.username_url !== null) {
             window.location.replace("/home/"+this.username_url);
         }
@@ -192,11 +183,8 @@ class Home extends Component {
     }
 
 
-    yahootest = () =>{
 
-    }
-
-    returnText = () => {
+    returnText = () => {//return html code
         if (this.username_url !== null) {
             return (
                 <h4>Your marked stock:</h4>
@@ -217,7 +205,6 @@ class Home extends Component {
                 <div className="main">
                     <h1>Home</h1>
                 </div>
-                <div >{this.yahootest()}</div>
                 <div className="popp">
                 <div className="pop" id="pop_left" onClick={this.gopop} style={{ borderRight: 'none'}}>Popular Stock</div>
                 <div className="pop" id="pop_right" onClick={this.gomark}>Marked Stock</div>
@@ -235,7 +222,7 @@ class Home extends Component {
                 </select>
                 </div>
 
-                <this.returnCurrentUser/>
+                
                 <div>
                     {this.displayMarks(this.state.marks)}
                 </div>

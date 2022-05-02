@@ -9,7 +9,7 @@ class Login extends Component {
         password: ""
     }
 
-    clearText = () => {
+    clearText = () => {//clear login bar text
         this.setState({
             username: "",
             password: ""
@@ -26,19 +26,19 @@ class Login extends Component {
         }
     }
 
-    handleUsernameChange = (e) => {
+    handleUsernameChange = (e) => {//change username bar
         this.setState({
             username: e.target.value
         });
     }
 
-    handlePwdChange = (e) => {
+    handlePwdChange = (e) => {//change password bar
         this.setState({
             password: e.target.value
         });
     }
 
-    submit = (e) => {
+    submit = (e) => {//on submit
        if (this.state.username === "") {
            alert("Username is empty!");
            this.clearText();
@@ -51,7 +51,7 @@ class Login extends Component {
            return;
        }
 
-       axios.get('/users/' + this.state.username)
+       axios.get('/users/' + this.state.username)//update to server
        .then((res) => {
            const data = res.data;
            if (data.length > 0) {
