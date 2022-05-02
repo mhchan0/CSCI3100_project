@@ -57,14 +57,11 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
         try:
             stock = yf.download(symbols, start=modified_start, end=modified_end, timeout=3)
             retry = 10
-            print("Retry: ", retry)
             # For error handling, as yfinance sometimes does not work for unknown reasons
             while stock.shape[0] < 3 and retry > 0:
                 stock = yf.download(symbols, start=modified_start, end=modified_end, timeout=3)
                 retry -= 1
-                print("That part has been run")
             if retry > 0:
-                print(stock)
                 stock.to_csv(f'stock_data/{symbols}.csv')
 
             else:
