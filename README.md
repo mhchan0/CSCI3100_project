@@ -6,5 +6,12 @@ Our group is going to use HTML5, CSS3 and React for front-end development. For b
 
 One should note that information provided in this software is not investment advice and should not be treated as such. People seeking investment advice should consult investment professionals. 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+To run the server & client:
+1. python data_downloader.py (to download newest data)
+2. npm install (to install modules)
+3. python stockdb.py (to make stock csv to database)
+4. npm run dev (to run both server and client)
+5. visit http://localhost:3000/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 Last updated: March 31, 2022
