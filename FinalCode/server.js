@@ -58,7 +58,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('file');
 
 app.post('/upload/:username',function(req, res) {
-     
+     //upload with username
     upload(req, res, function (err) {
            if (err instanceof multer.MulterError) {
                return res.status(500).json(err)
@@ -72,24 +72,26 @@ app.post('/upload/:username',function(req, res) {
 });
 
 app.post('/prediction/test', function(req, res){
-        console.log("debugggg", req.body);
+        //console.log("debugggg", req.body);
+        var fs = require('fs');
+        //delete stock graph before generating a new graph
+        fs.unlink('./client/public/stock_graph/'+req.body.stock+'.jpg', function (err) {
+            console.log('File deleted!');
+        });
         let option={
             args:[req.body.stock,(req.body.CI/100),(req.body.params/100)]
         };
          //option are those parameters we need to send to the python program
         let option2={args:[req.body.stock]};
         //can add one more para for the date
-
-        PythonShell.run("data_downloader.py",option2,(err,result)=>{});
-        console.log("123");
-        //update data by calling R function
+    
         let result = R.callMethod("prediction.R", "arma_garch_pred", {ticker: req.body.stock, m: parseFloat( req.body.m),use_period:parseFloat( req.body.use_period)});
+        //update data by calling R function
+        PythonShell.run("data_downloader.py",option2,(err,result)=>{});
         //update  data by calling python script
-        console.log("456");
+    
         PythonShell.run('prediction_tool.py',option,(err,result)=>{
-            console.log("789");
-            //if(err) throw err;
-            //console.log("send: ",result);
+
             res.send(result);
             //send the result
             
@@ -105,7 +107,6 @@ app.post('/stockdata', function(req, res) {
 
         //if (err) throw err;
         res.send(result);
-
     });
     
 })
