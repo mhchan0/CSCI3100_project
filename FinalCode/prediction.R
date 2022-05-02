@@ -1,8 +1,22 @@
+#-------------------------------------------------------------------------------
+# PROGRAM prediction - Program for computing expectations and standard 
+# deviations of log returns
+# PROGRAMMER: WONG, Kong Wa
+# VERSION 1.0.0: written Mar 30, 2022
+# REVISION 1.1: Apr 4, 2022, default parameters updated
+# PURPOSE: To compute expectations and standard deviations of log returns for 
+# specified period and stock using ARMA-GARCH model with historical stock data
+# Refer to header comment block of the function for details.
+#-------------------------------------------------------------------------------
+
 library(parallel)
 library(rugarch, warn.conflicts = FALSE)
 
 arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), garch_order=c(2, 2)) {
-  # Predicts expected log return and standard deviation, and output them to csv files.
+  #-----------------------------------------------------------------------------
+  # Computes expected log return and standard deviation of the next m day(s)
+  # using use_period days of historical data, and output them to csv 
+  # files.
     
   # Parameters
   # ----------
@@ -20,6 +34,7 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   # Returns
   # -------
   # None.
+  #-----------------------------------------------------------------------------
 
   setwd("./") #C:/Users/hinsl/OneDrive/Desktop/react/testing__4/
   path <- paste("stock_data/", ticker, ".csv", sep="")
@@ -49,4 +64,4 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
   write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
 }
-arma_garch_pred("AAPL", m=20)
+# arma_garch_pred("AAPL", m=20)

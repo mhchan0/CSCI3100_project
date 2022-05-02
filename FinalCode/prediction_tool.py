@@ -1,3 +1,13 @@
+"""
+PROGRAM prediction_tool - Program for computing basic risk/return metrics
+PROGRAMMER: WONG, Kong Wa
+VERSION 1.0.0: written Apr 8, 2022
+REVISION 1.0.1: Apr 9, 2022, for integration with front-end application
+PURPOSE: To computing basic risk/return metrics using expected value and
+         standard deviations calculated using prediction.R
+Refer to header comment block of functions for details of each function.
+"""
+
 import math
 import numpy as np
 import pandas as pd
@@ -18,6 +28,7 @@ def price_confidence_interval(stock, CI=0.95, plot_graph=False):
     plot_graph: bool, optional.
         If True, plot graph of expected return along with confidence interval;
         not plot graph otherwise. The default is False.
+        
     Returns
     -------
     upper_bound : float
@@ -105,6 +116,7 @@ def return_confidence_interval(stock, CI=0.95):
     plot_graph: bool, optional.
         If True, plot graph of expected return along with confidence interval;
         not plot graph otherwise. The default is False.
+        
     Returns
     -------
     upper_bound : float
@@ -139,6 +151,7 @@ def VaR_price(stock, param=0.95):
         Stock to predict.
     param : float, optional
         Confidence interval to be calculated. The default is 0.95.
+        
     Returns
     -------
     final_VaR : float
@@ -181,6 +194,7 @@ def VaR_percent(stock, param=0.95):
         Stock to predict.
     param : float, optional
         Confidence interval to be calculated. The default is 0.95.
+        
     Returns
     -------
     final_VaR : float
@@ -208,6 +222,7 @@ def expected_log_return(stock):
     ----------
     stock : str
         Stock to predict.
+        
     Returns
     -------
     total_expected_return : float
@@ -224,6 +239,7 @@ def expected_price(stock):
     ----------
     stock : str
         Stock to predict.
+        
     Returns
     -------
     price : float
@@ -245,6 +261,7 @@ def expected_std(stock):
     ----------
     stock : str
         Stock to predict.
+        
     Returns
     -------
     std : float
@@ -263,6 +280,7 @@ def expected_sharpe_ratio(stock):
     ----------
     stock : str
         Stock to predict.
+        
     Returns
     -------
     expected_sharpe : float

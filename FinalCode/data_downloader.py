@@ -1,3 +1,13 @@
+"""
+PROGRAM data_downloader - Program for downloading stock data
+PROGRAMMER: WONG, Kong Wa
+VERSION 1.0.0: written Mar 31, 2022
+REVISION 1.1.0: Apr 2, fixed a bug where download gets stuck for no apparent reason
+REVISION 1.1.1: Apr 9, 2022, for integration with front-end application
+PURPOSE: To download raw stock data from Yahoo! Finance and export them to csv files
+Refer to header comment block of the function for details.
+"""
+
 import pandas as pd
 import yfinance as yf
 import datetime
@@ -33,8 +43,8 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
             try:
                 stock = yf.download(symbol[0], start=modified_start, end=modified_end, timeout=3)
                 retry = 10
-                while stock.shape[
-                    0] < 3 and retry > 0:  # For error handling, as yfinance sometimes does not work for unknown reasons
+                # For error handling, as yfinance sometimes does not work for unknown reasons
+                while stock.shape[0] < 3 and retry > 0:
                     stock = yf.download(symbol[0], start=modified_start, end=modified_end, timeout=3)
                     retry -= 1
                 if retry > 0:
@@ -47,8 +57,8 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
         try:
             stock = yf.download(symbols, start=modified_start, end=modified_end, timeout=3)
             retry = 10
-            while stock.shape[
-                0] < 3 and retry > 0:  # For error handling, as yfinance sometimes does not work for unknown reasons
+            # For error handling, as yfinance sometimes does not work for unknown reasons
+            while stock.shape[0] < 3 and retry > 0:
                 stock = yf.download(symbols, start=modified_start, end=modified_end, timeout=3)
                 retry -= 1
             if retry > 0:
@@ -57,8 +67,6 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
                 print(f"Error downloading data for {symbols}. Please check if inputs are correct.")
         except Exception:
             pass
-    # SP500 = yf.download('SPY',start=datetime.date(2019, 10, 2), end=modified_end)
-    # SP500.to_csv(f'stock_data/SP500.csv')
 
 if (len(sys.argv) == 2):
     s=sys.argv[1]
