@@ -56,10 +56,6 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   mu.predict <- as.numeric(fitted(pred))
   sig.predict <- as.numeric(sigma(pred))
   
-  # Plotting mu and sigma (for debugging only, to be deleted)
-  plot(mu.predict, type='l')
-  plot(sig.predict, type='l')
-  
   # Exporting ARMA-GARCH prediction data
   write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
   write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
