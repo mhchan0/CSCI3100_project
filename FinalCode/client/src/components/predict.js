@@ -1,3 +1,12 @@
+/**
+ * PROGRAM prediction.js - Program for computing and displaying risk and return
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 6, 2022
+ * PURPOSE: To compute risk and return and display the prediction graph according to user's inputs
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
