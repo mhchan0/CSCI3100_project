@@ -1,3 +1,12 @@
+/**
+ * PROGRAM server.js - Program for making server 
+ * PROGRAMMER: CHAN, Man Ho, LEE, Yan Hin, LUI, him, WONG, Kong Wa
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To require different modules for server, defining port, connect to database,
+ *          upload photo to server, run python and R programs to get newest data and get
+ *          predictions.
+ * 
+ */
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
