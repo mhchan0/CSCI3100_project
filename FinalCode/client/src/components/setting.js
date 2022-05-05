@@ -1,3 +1,12 @@
+/**
+ * PROGRAM setting.js - Program for personalization
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 9, 2022
+ * PURPOSE: To let user personalize his own account, including changing theme, uploading profile photo and resetting passwords
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
