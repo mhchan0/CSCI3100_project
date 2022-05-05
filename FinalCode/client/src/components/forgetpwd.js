@@ -1,3 +1,12 @@
+/**
+ * PROGRAM forgetpwd.js - Program for users to change password if they forget password
+ * PROGRAMMER: LUI, Him
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get users records from database and send email to users to reset passwords
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
