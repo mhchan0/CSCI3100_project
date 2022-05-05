@@ -1,3 +1,11 @@
+/**
+ * PROGRAM App.js - Program for defining 
+ * PROGRAMMER: CHAN, Man Ho, LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To define all the routes of the website
+ * 
+ */
+
 import React from 'react';
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 
