@@ -1,3 +1,10 @@
+/**
+ * PROGRAM user.api.js - Program for making user database request
+ * PROGRAMMER: CHAN, Man Ho, LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To make user database request
+ * 
+ */
 const express = require('express');
 
 const router = express.Router();
