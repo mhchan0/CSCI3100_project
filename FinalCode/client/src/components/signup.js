@@ -1,3 +1,12 @@
+/**
+ * PROGRAM signup.js - Program for users to sign up
+ * PROGRAMMER: LUI, Him
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get users records from database and perform validation check for sign up
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
