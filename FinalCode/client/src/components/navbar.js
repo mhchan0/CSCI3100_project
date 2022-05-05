@@ -1,3 +1,12 @@
+/**
+ * PROGRAM navbar.js - Program for displaying navigation bar after user logging in
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get user records from database and display navigation bar along with username and user's profile photo
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
