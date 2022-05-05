@@ -1,3 +1,12 @@
+/**
+ * PROGRAM search.js - Program for users to search a stock in search bar
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 7, 2022
+ * PURPOSE: To display a search bar for users inputting a stock for searching
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import Logout from './logout';
