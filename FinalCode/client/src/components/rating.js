@@ -1,3 +1,12 @@
+/**
+ * PROGRAM rating.js - Program for users to rate
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To let user rate a stock and display user rating and the average ratings of a stock 
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import react, { Component } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
