@@ -1,3 +1,12 @@
+/**
+ * PROGRAM signup.js - Program for users to reset passwords
+ * PROGRAMMER: LUI, Him
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get users records from database and reset passwords of the current user
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
