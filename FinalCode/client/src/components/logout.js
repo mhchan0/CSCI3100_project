@@ -1,3 +1,12 @@
+/**
+ * PROGRAM logout.js - Program for users to log out
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 3, 2022
+ * PURPOSE: To display log out button for login users to log out
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import { Link, useParams } from "react-router-dom";
 
