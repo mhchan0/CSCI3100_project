@@ -1,3 +1,12 @@
+/**
+ * PROGRAM home_pop.js - Program for displaying popular stocks in homepage
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 7, 2022
+ * PURPOSE: To get stocks records from database and list the popular stocks to users
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import Logout from './logout';
