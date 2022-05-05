@@ -1,3 +1,12 @@
+/**
+ * PROGRAM search_main.js - Program for listing stocks for users to search
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 7, 2022
+ * PURPOSE: To get stocks records from database and display a list of stocks for users to search
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import Navbar from './navbar';
