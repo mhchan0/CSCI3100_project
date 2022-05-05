@@ -1,5 +1,5 @@
 /**
- * PROGRAM prediction.js - Program for computing and displaying risk and return
+ * PROGRAM predict.js - Program for computing and displaying risk and return
  * PROGRAMMER: LEE, Yan Hin
  * VERSION 1.0.0: written Apr 6, 2022
  * PURPOSE: To compute risk and return and display the prediction graph according to user's inputs
