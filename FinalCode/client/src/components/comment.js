@@ -1,3 +1,12 @@
+/**
+ * PROGRAM comment.js - Program for get and display comments of stocks
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get comment records of stock from database and display comments of stocks to webpage
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
