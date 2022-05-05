@@ -1,5 +1,5 @@
 /**
- * PROGRAM signup.js - Program for users to reset passwords
+ * PROGRAM restpwd.js - Program for users to reset passwords
  * PROGRAMMER: LUI, Him
  * VERSION 1.0.0: written Apr 8, 2022
  * PURPOSE: To get users records from database and reset passwords of the current user
