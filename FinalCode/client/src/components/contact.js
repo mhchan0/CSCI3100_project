@@ -1,3 +1,12 @@
+/**
+ * PROGRAM contactus.js - Program for displaying StolkStalker email
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 5, 2022
+ * PURPOSE: To show StolkStalker email for contact
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import Logout from './logout';
