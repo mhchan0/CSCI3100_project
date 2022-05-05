@@ -1,3 +1,12 @@
+/**
+ * PROGRAM home.js - Program for displaying homepage
+ * PROGRAMMER: LEE, Yan Hin
+ * VERSION 1.0.0: written Apr 7, 2022
+ * PURPOSE: To get bookmark records from database and display marked stock for login users
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import Logout from './logout';
