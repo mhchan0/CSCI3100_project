@@ -23,31 +23,31 @@ class Signup extends Component {
         confirm_pwd: ""
     }
 
-    handleUsernameChange = (e) => {
+    handleUsernameChange = (e) => {//handle username change
         this.setState({
             username: e.target.value
         });
     }
 
-    handlEmailChange = (e) => {
+    handlEmailChange = (e) => {//handle email change
         this.setState({
             email: e.target.value
         });
     }
 
-    handlePwdChange = (e) => {
+    handlePwdChange = (e) => {//handle old password input change
         this.setState({
             password: e.target.value
         });
     }
 
-    handleCPwdChange = (e) => {
+    handleCPwdChange = (e) => {//handle confirm password input change
         this.setState({
             confirm_pwd: e.target.value
         });
     }
 
-    clearText = () => {
+    clearText = () => {//clear text in input bars
         this.setState({
             username: "",
             email: "",
@@ -76,7 +76,7 @@ class Signup extends Component {
         }
     }
 
-    submit = () => {
+    submit = () => {//onsubmit 
         if (this.state.username === "") {
             alert("Username cannot be empty!");
             this.clearText();
@@ -97,7 +97,7 @@ class Signup extends Component {
             this.clearText();
             return;
         }
-
+        //see if username exist
         axios.get('/users/' + this.state.username)
         .then((res) => {
             let data = res.data;
@@ -106,7 +106,7 @@ class Signup extends Component {
                 this.clearText();
                 return;
             }
-            else {
+            else {//see if email exist
                 axios.get('/users/findemail/' + this.state.email)
                 .then((res) => {
                     data = res.data;
@@ -124,7 +124,7 @@ class Signup extends Component {
                             theme: -1,
                             photo: "guest.jpg"
                         }
-
+                        //save as a new account
                         axios({
                             url: '/users/save',
                             method: 'POST',
@@ -154,7 +154,7 @@ class Signup extends Component {
         })
     }
 
-    sendEmail = () => {
+    sendEmail = () => {//send verification email
         axios.get('/users/' + this.state.username)
         .then((res) => {
             const id = res.data[0]._id;

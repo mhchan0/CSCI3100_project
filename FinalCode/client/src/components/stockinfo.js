@@ -1,3 +1,12 @@
+/**
+ * PROGRAM stockinfo.js - Program for displaying stock information
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get stock information and display stock information
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 

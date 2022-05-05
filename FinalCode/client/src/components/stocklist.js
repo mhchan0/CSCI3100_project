@@ -1,5 +1,14 @@
+/**
+ * PROGRAM stocklist.js - Program for finding and displaying stock list
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To find a list of all stocks and displaying stock list, also include 
+ *          the function to sort in ascending or descending order with stock name or stock symbol
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
-import { useParams } from "react-router-dom";
 import Navbar from './navbar';
 import Logout from './logout';
 import axios from 'axios';

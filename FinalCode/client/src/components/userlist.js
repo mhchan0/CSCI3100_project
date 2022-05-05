@@ -1,3 +1,12 @@
+/**
+ * PROGRAM userlist.js - Program for displaying list of users for admin
+ * PROGRAMMER: CHAN, Man Ho
+ * VERSION 1.0.0: written Apr 8, 2022
+ * PURPOSE: To get list of all users and let admin to change their passoword
+ * 
+ * Refer to header comment block of functions for details of each function.
+ */
+
 import React, { Component } from 'react';
 import axios from 'axios';
 
