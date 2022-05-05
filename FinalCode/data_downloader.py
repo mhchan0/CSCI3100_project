@@ -29,7 +29,7 @@ def data_download(symbols=None, date=datetime.date(2017, 1, 1)):
     -------
     None.
     """
-    # import data
+
     start = date
     end = datetime.date.today()
     modified_start = start + datetime.timedelta(days=1)

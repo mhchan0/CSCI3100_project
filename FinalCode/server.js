@@ -84,13 +84,13 @@ app.post('/prediction/test', function(req, res){
          //option are those parameters we need to send to the python program
         let option2={args:[req.body.stock]};
         //can add one more para for the date
-    
-        let result = R.callMethod("prediction.R", "arma_garch_pred", {ticker: req.body.stock, m: parseFloat( req.body.m),use_period:parseFloat( req.body.use_period)});
+		PythonShell.run("data_downloader.py",option2,(err,result)=>{});
+        //update data by calling python script
+        let result = R.callMethod("basic_stats_computer.R", "arma_garch_pred", {symbol: req.body.stock, m: parseFloat( req.body.m),use_period:parseFloat( req.body.use_period)});
         //update data by calling R function
-        PythonShell.run("data_downloader.py",option2,(err,result)=>{});
-        //update  data by calling python script
+
     
-        PythonShell.run('prediction_tool.py',option,(err,result)=>{
+        PythonShell.run('metrics_computer.py',option,(err,result)=>{
 
             res.send(result);
             //send the result

@@ -12,7 +12,7 @@
 library(parallel)
 library(rugarch, warn.conflicts = FALSE)
 
-arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), garch_order=c(2, 2)) {
+arma_garch_pred <- function(symbol, m=7, use_period=125) {
   #-----------------------------------------------------------------------------
   # Computes expected log return and standard deviation of the next m day(s)
   # using use_period days of historical data, and output them to csv 
@@ -20,16 +20,12 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
     
   # Parameters
   # ----------
-  # ticker: str
-  #   ticker of stock to predict
+  # symbol: str
+  #   symbol of stock to predict
   # m: int, optional
   #   Number of periods (days) to predict. The default is 7.
   # use_period: int, optional
   #   Number of periods (days) to use for prediction. The default is 125.
-  # arma_order: vector of int, optional
-  #   Order of ARMA part of the model. The default is c(1, 1).
-  # garch_order: vector of int, optional
-  #   Order of GARCH part of the model. The default is c(2, 2).
 
   # Returns
   # -------
@@ -37,11 +33,12 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   #-----------------------------------------------------------------------------
 
   setwd("./") #C:/Users/hinsl/OneDrive/Desktop/react/testing__4/
-  path <- paste("stock_data/", ticker, ".csv", sep="")
+  path <- paste("stock_data/", symbol, ".csv", sep="")
   stock <- read.csv(path)$Adj.Close
   stock <- tail(stock, use_period)
-  print(stock)
   log_returns <- diff(log(stock), lag=1)
+  arma_order=c(1, 1)
+  garch_order=c(2, 2)
   
   # Fitting ARMA-GARCH model
   var_model <- list(model = "sGARCH", garchOrder = garch_order)
@@ -57,7 +54,6 @@ arma_garch_pred <- function(ticker, m=7, use_period=125, arma_order=c(1, 1), gar
   sig.predict <- as.numeric(sigma(pred))
   
   # Exporting ARMA-GARCH prediction data
-  write.csv(mu.predict, paste("prediction_data/", ticker, "_mu.csv", sep=""))
-  write.csv(sig.predict, paste("prediction_data/", ticker, "_sig.csv", sep=""))     
+  write.csv(mu.predict, paste("prediction_data/", symbol, "_mu.csv", sep=""))
+  write.csv(sig.predict, paste("prediction_data/", symbol, "_sig.csv", sep=""))     
 }
-# arma_garch_pred("AAPL", m=20)

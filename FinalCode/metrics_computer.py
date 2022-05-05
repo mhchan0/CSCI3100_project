@@ -15,9 +15,10 @@ import scipy.stats as ss
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
+
 def price_confidence_interval(stock, CI=0.95, plot_graph=False):
     """
-    Predicts confidence interval of price for stock.
+    Predicts confidence interval of price for stock and plot stock price graph.
     
     Parameters
     ----------
@@ -235,6 +236,7 @@ def expected_log_return(stock):
 def expected_price(stock):
     """
     Predicts price (in $) of stock.
+    
     Parameters
     ----------
     stock : str
@@ -257,6 +259,7 @@ def expected_price(stock):
 def expected_std(stock):
     """
     Predicts standard deviation of log return of stock.
+    
     Parameters
     ----------
     stock : str
