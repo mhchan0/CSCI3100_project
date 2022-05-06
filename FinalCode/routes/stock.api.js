@@ -108,7 +108,7 @@ router.route('/update').put((req, res, next) => {
                 console.log('rating updated !')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
 });
