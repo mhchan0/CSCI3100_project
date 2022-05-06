@@ -51,7 +51,7 @@ router.route('/find/:username/:stock').get((req, res, next) => {
                 }
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
 });
@@ -88,7 +88,7 @@ router.route('/update').put((req, res, next) => {
                 console.log('bookmark updated !')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
 });
@@ -102,7 +102,7 @@ router.route('/delete').put((req, res, next) => {
                 console.log('bookmark deleted !')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
 });
