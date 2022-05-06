@@ -80,7 +80,7 @@ router.route('/uploadphoto').put((req, res, next) => {
                 console.log('Your photo has been updated.')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
     
@@ -101,7 +101,7 @@ router.route('/updatetheme').put((req, res, next) => {
                 console.log('Your theme has been updated.')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
     
@@ -122,7 +122,7 @@ router.route('/updatepwd').put((req, res, next) => {
                 console.log('Your theme has been updated.')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
     
@@ -143,7 +143,7 @@ router.route('/changeusertype').put((req, res, next) => {
                 console.log('Your status has been updated.')
             }
             });
-    }catch{
+    }catch(error){
         return -1;
     }
     
