@@ -1,0 +1,18 @@
+General input: No. of periods to use for prediction, no. of periods to predict
+Default: No. of periods to use for prediction=125 (must be 100-750), no. of periods to predict=5 (must be 1-20)
+
+Confidence Interval input: ___% Confidence interval (Or Confidence Interval (___%))
+Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
+Return (display) four floats, in the form "($___, $___) ((___%, ___%))"
+
+Value at Risk (VaR) input: ___% Value at Risk (VaR) ((Or Value at Risk (VaR) (___%)))
+Default=95%, must be >0% and <100% (cannot be equal to 0% or 100%)
+Return (display) two floats, in the form "$___ (___%)"
+
+Expected price, Expected log return, Expected volatility, Annualized Sharpe ratio: No additional parameter
+Return (display) a float (NOT $ except for expected price)
+
+Step:
+1. Download data for the stock from yfinance (data_download function in predict/datadownloader.py) 
+2. Run arma_garch_pred function in prediction.R (ticker=symbol, m=no. of periods to predict, use_period=No. of periods to use for prediction)
+3. Run all the function in prediction_tool ()
